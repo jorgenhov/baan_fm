@@ -1,0 +1,22 @@
+import React from 'react';
+import SearchDialog from '../Logic/Dialogs/SearchDialog.js'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+export default ({ products, onNewSearch, periods }) => (
+  <AppBar
+    position="static"
+  >
+    <Toolbar className="headerUI">
+      <Typography variant="title" color="inherit" style={{flex: 1}}>
+        Ships in port
+      </Typography>
+      <SearchDialog
+        products={products}
+        periods={periods}
+        onSearch={onNewSearch}
+      />
+    </Toolbar>
+  </AppBar>
+)

@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: rgb(244,244,244); /* Old browsers */
+  background: -moz-linear-gradient(45deg, rgba(244,244,244,1) 0%, rgba(219,219,219,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, rgba(244,244,244,1) 0%,rgba(219,219,219,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, rgba(244,244,244,1) 0%,rgba(219,219,219,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#dbdbdb',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.headerUI {
+  background: #001644; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #001644 0%, #074a91 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #001644 0%,#074a91 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #001644 0%,#074a91 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.logicPanes {
+  background: #000000; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #000000 0%, #2b2b2b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #000000 0%,#2b2b2b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #000000 0%,#2b2b2b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.logicPapers {
+  color: rgba(0, 4, 48, 0);
+}
+
+.portList p {
+  color: white;
+}
+
+.searchDialogStyle {
+  background: rgb(0,22,68); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(0,22,68,0.7) 0%, rgba(7,74,145,0.7) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, rgba(0,22,68,0.7) 0%,rgba(7,74,145,0.7) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, rgba(0,22,68,0.7) 0%,rgba(7,74,145,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001644', endColorstr='#074a91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
