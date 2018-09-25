@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Header, Footer } from './Layouts';
 import LogicPane from './Logic/LogicPane';
 import { tabs, ships, periods, product2, prodfam, obg } from '../store.js';
-import { ipdbships } from '../ipdb.js';
+//import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
 
 export default class extends Component {
@@ -60,7 +60,9 @@ export default class extends Component {
 
   handleNewSearch = searchopt => {
     console.log(searchopt);
-    console.log(searchopt.product);
+    console.log(searchopt.selectedOptionFam);
+    console.log(searchopt.selectedOptionProd);
+    console.log(searchopt.selectedOptionObg);
     console.log(searchopt.fromdate);
     console.log(searchopt.todate);
     let days = diffdate(searchopt.fromdate, searchopt.todate)
@@ -76,12 +78,13 @@ export default class extends Component {
       { ship } = this.state
 
     // ikkje brukt
+    /*
     const shipobject = ships.reduce((x, [k, v]) => {
       x[k] = v;
       return x;
     }, {});
-
-    console.log('shipobject: ' , shipobject);
+    */
+    //console.log('shipobject: ' , shipobject);
 
     ships.sort(function(a,b) {
       return b[1].length - a[1].length;
@@ -90,14 +93,14 @@ export default class extends Component {
     //console.log(ships);
 
     const selportobject = this.state.selportobj;
-
+    /*
     const mapedships = ipdbships.map(([object, prod, imo]) =>{
           return(
             ' | ' + object + ' ~ ' + prod + ' ~ ' + imo + ' | '
           )
     });
-
-    console.log(mapedships);
+    */
+    //console.log(mapedships);
 
     //test api apiData
     const apid = this.state.apiData;
