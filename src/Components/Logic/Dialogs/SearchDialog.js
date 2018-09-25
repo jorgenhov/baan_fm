@@ -10,7 +10,8 @@ import Search from '@material-ui/icons/Search';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+//import Select from '@material-ui/core/Select';
+import Select from 'react-select'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -20,7 +21,7 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 100,
+    minWidth: 400,
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
@@ -28,7 +29,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 140,
+    width: 240,
   },
   searchBackground: {
     backgroundColor: 'rgba(0, 4, 48, .7)',
@@ -36,12 +37,22 @@ const styles = theme => ({
 });
 
 class SearchDialog extends Component {
-  state = {
-    open: false,
-    searchopt: {
-        product: '',
-        fromdate: new Date().toJSON().slice(0,10),
-        todate: new Date().toJSON().slice(0,10),
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      selectedOptionFam: {value: 'All Product family', label: ' All Product family'},
+      selectedOptionProd: [{value: 'All Products', label: 'All Products'}],
+      selectedOptionObg:[{value: 'All objects', label: 'All objects'}],
+      prodfam: this.props.prodfam,
+      product2: this.props.product2,
+      obg: this.props.obg,
+      filteredOptions: this.props.product2,
+      filteredOptionsObg: this.props.obg,
+      searchopt: {
+          fromdate: new Date().toJSON().slice(0,10),
+          todate: new Date().toJSON().slice(0,10),
+      }
     }
   }
 
@@ -65,15 +76,6 @@ class SearchDialog extends Component {
     }
   }
 
-  handleChange = name => ({ target: { value } }) => {
-    this.setState({
-      searchopt: {
-        ...this.state.searchopt,
-        [name]: value
-      }
-    })
-  }
-
   handleDateFromChange = (event)=>{
     this.setState({
       searchopt: {
@@ -92,6 +94,28 @@ class SearchDialog extends Component {
     })
   }
 
+  handleChangeFam = (selectedOptionFam) => {
+     this.setState({selectedOptionFam});
+     let filter = selectedOptionFam ? this.state.product2.filter((o) => o.link === selectedOptionFam.value) : this.state.product2
+     console.log(filter)
+
+     this.setState({filteredOptions: filter})
+  };
+
+  handleChangeProd = (selectedOptionProd) => {
+    this.setState({selectedOptionProd})
+
+    let filter = selectedOptionProd ? this.state.obg.filter((o) => o.link === selectedOptionProd.value) : this.state.obg
+    console.log(filter)
+
+    this.setState({filteredOptionsObg: filter})
+  }
+
+  handleChangeObg = (selectedOption) => {
+    this.setState({selectedOptionObg: selectedOption})
+  }
+
+
   handleToggle = () => {
     this.setState({
       open: !this.state.open
@@ -100,13 +124,18 @@ class SearchDialog extends Component {
 
 
   render() {
-    const { open, searchopt: { product, fromdate, todate } } = this.state,
+    const { open, searchopt: { fromdate, todate } } = this.state,
           { classes, products: categories} = this.props
 
+    const prodfam = this.state.prodfam;
+    const filteredOptions = this.state.filteredOptions;
+    const filteredOptionsObg = this.state.filteredOptionsObg
+
+    console.log('seloptprod');
+    console.log(this.state.selectedOptionProd);
+
     //const today = new Date().toJSON().slice(0,10);
-
     //const dadate = this.state.fromdate;
-
     //console.log("date: " + fromdate);
 
     return (
@@ -132,13 +161,27 @@ class SearchDialog extends Component {
                     Product
                   </InputLabel>
                   <Select
-                    value={product}
-                    onChange={this.handleChange('product')}
-                  >
-                  { categories.map(category =>
-                    <MenuItem key={category} value={category}>{category}</MenuItem>
-                  )}
-                  </Select>
+                    className="select-prod"
+                    name="form-field-name"
+                    value={this.state.selectedOptionFam}
+                    onChange={this.handleChangeFam}
+                    options={prodfam}
+                  />
+                  <Select
+                    className="select-prod"
+                    name="form-field-name"
+                    value={this.state.selectedOptionProd}
+                    onChange={this.handleChangeProd}
+                    options={filteredOptions}
+                  />
+                  <Select
+                    className="select-prod"
+                    name="form-field-name"
+                    value={this.state.selectedOptionObg}
+                    onChange={this.handleChangeObg}
+                    isMulti
+                    options={filteredOptionsObg}
+                  />
                 </FormControl>
                 <TextField
                   id="date"

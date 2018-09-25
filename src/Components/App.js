@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Footer } from './Layouts';
 import LogicPane from './Logic/LogicPane';
-import { tabs, ships, products, periods } from '../store.js';
+import { tabs, ships, periods, product2, prodfam, obg } from '../store.js';
 import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
 
@@ -105,7 +105,9 @@ export default class extends Component {
     return (
       <div className="bodyClass">
         <Header
-          products={products}
+          product2={product2}
+          prodfam={prodfam}
+          obg={obg}
           periods={periods}
           onNewSearch={this.handleNewSearch}
         />

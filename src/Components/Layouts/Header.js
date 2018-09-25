@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-export default ({ products, onNewSearch, periods }) => (
+export default ({ products, onNewSearch, periods, product2, prodfam, obg }) => (
   <AppBar
     position="static"
   >
@@ -13,7 +13,9 @@ export default ({ products, onNewSearch, periods }) => (
         Ships in port
       </Typography>
       <SearchDialog
-        products={products}
+        product2={product2}
+        prodfam={prodfam}
+        obg={obg}
         periods={periods}
         onSearch={onNewSearch}
       />

@@ -2,6 +2,22 @@ export const tabs = [
   'Equipment/Period', 'IMO', 'Port'
 ]
 
+export const prodfam = [{value: 'DM', label: 'DM'},
+  {value: 'SG', label: 'SG'},
+  {value: 'Rudder', label: 'Rudder'}]
+
+export const product2 = [{value: 'DM', label: 'DM', link: 'DM'},
+  {value: 'LP Winch', label: 'LP Winch', link: 'DM'},
+  {value: 'SG-RV', label: 'SG-RV', link: 'SG'},
+  {value: 'SG-SR', label: 'SG-SR', link: 'SG'},
+  {value: 'SG', label: 'SG', link: 'SG'},
+  {value: 'Rudder', label: 'Rudder', link: 'Rudder'},
+  {value: 'Nordavit', label: 'Nordavit', link: 'Rudder'}]
+
+export const obg = [{value: 'BR01', label: 'BR01', link: 'LP Winch'},
+  {value: 'FR03', label: 'FR03', link: 'SG-RV'},
+  {value: 'ND01', label: 'ND01', link: 'Nordavit'}]
+
 export const products = [
     'Crane', 'DM', 'LP Winch', 'Nordavit', 'Rudder', 'SG', 'SG-RV', 'SG-SR', 'SG-SV', 'SG-TF'
 ]

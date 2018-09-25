@@ -38,3 +38,7 @@ body {
   background: linear-gradient(135deg, rgba(0,22,68,0.7) 0%,rgba(7,74,145,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001644', endColorstr='#074a91',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+.select-prod {
+  margin-bottom: 1em; 
+}
