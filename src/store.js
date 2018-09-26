@@ -149,6 +149,45 @@ export const ports = [
   'Rotterdam', 'Amsterdam', 'Reikjavik', 'Oslo', 'Ålesund'
 ]
 
+export const ships = [
+    {
+      imo: '9239446',
+      name: 'Boaty mc boatface',
+      ports: 'Rotterdam',
+      eta: '2018-09-21 18:00:00+00:00',
+      lat: 51.916321,
+      lng: 4.267502,
+    },
+    {
+      imo: '9122978',
+      name: 'Larsen',
+      ports: 'Rotterdam',
+      eta: '2018-09-26 18:00:00+00:00',
+      lat: 51.916321,
+      lng: 4.267502,
+    },
+    {
+      imo: '9255098',
+      name: 'Fishy',
+      ports: 'Ajman',
+      eta: '2018-09-22 09:00:00+00:00',
+      lat: 25.422811,
+      lng: 55.452976,
+    },
+    {
+      imo: '9283435',
+      name: 'Laksen',
+      ports: 'Tobata',
+      eta: '2018-09-29 18:00:00+00:00',
+      lat: 33.915301,
+      lng: 130.84631,
+    },
+]
+
+
+
+
+
 function countperiod(j){
   let count = []
   let i
@@ -161,7 +200,7 @@ function countperiod(j){
 
 export const periods = countperiod(15)
 
-export const ships = [
+export const portsdata = [
   {
     id: '23456',
     name: 'Boaty mc boatface',

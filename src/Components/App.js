@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Header, Footer } from './Layouts';
 import LogicPane from './Logic/LogicPane';
-import { tabs, ships, periods, product2, prodfam, obg } from '../store.js';
+//import SimpleMap from './Logic/SimpleMap';
+import { tabs, ships, periods, product2, prodfam, obg, portsdata } from '../store.js';
 //import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
 
@@ -9,6 +10,7 @@ export default class extends Component {
   state = {
     ships,
     portobj: {},
+    allports: {},
     selportobj: [],
     ship: {},
     selectedport: '',
@@ -25,9 +27,11 @@ export default class extends Component {
     this.setState({ portobj: {
       portobject
     }});
+
   }
 
   componentDidMount() {
+    /*
     fetch('http://localhost:8080/Ship')
     .then(response => response.json())
     .then(json => console.log(json));
@@ -36,7 +40,9 @@ export default class extends Component {
     fetch('http://localhost:8080/resttemp')
     .then(response => response.json())
     .then(json => console.log(json))
+    */
   }
+
 
   getShipsByPorts() {
       let portas = this.state.ships.reduce((ships, ship) => {
@@ -76,6 +82,9 @@ export default class extends Component {
     const ships = Object.entries(this.getShipsByPorts()),
       { selectedport } = this.state,
       { ship } = this.state
+
+
+    //const portobjects = Object.entries(this.state.allports);
 
     // ikkje brukt
     /*
@@ -124,10 +133,12 @@ export default class extends Component {
           onSelect={this.handlePortSelected}
         />
 
+        {/*
         <Footer
           tabs={ tabs }
         />
         <p>Fra api: {apid.content}</p>
+        */}
       </div>
     )
   }

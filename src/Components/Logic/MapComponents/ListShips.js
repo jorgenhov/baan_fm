@@ -8,9 +8,9 @@ class ListShips extends Component {
 
     return (
       <TableRow key={ship.id}>
-        <TableCell>{ship.id}</TableCell>
+        <TableCell>{ship.imo}</TableCell>
         <TableCell>{ship.name}</TableCell>
-        <TableCell>{ship.pos}</TableCell>
+        <TableCell>{ship.eta}</TableCell>
       </TableRow>
     );
   }

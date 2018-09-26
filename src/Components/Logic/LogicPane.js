@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+//import Paper from '@material-ui/core/Paper';
+//import Typography from '@material-ui/core/Typography';
 //import List from '@material-ui/core/List';
 //import ListItem from '@material-ui/core/ListItem';
 //import ListItemText from '@material-ui/core/ListItemText';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import ListShips from './ListShips';
+//import Table from '@material-ui/core/Table';
+//import TableBody from '@material-ui/core/TableBody';
+//import TableCell from '@material-ui/core/TableCell';
+//import TableHead from '@material-ui/core/TableHead';
+//import TableRow from '@material-ui/core/TableRow';
+//import ListShips from './ListShips';
+import PortMap from './PortMap';
 
 
 class LogicPane extends Component {
   render() {
+    /*
     const styles = {
       Paper: {
         padding: 20,
@@ -41,12 +43,17 @@ class LogicPane extends Component {
     }
 
 
+
     const portships = this.props.ships;
     console.log(selectedportobject);
-
+    */
 
     return (
       <Grid container>
+        <PortMap
+          ships={this.props.ships}
+        />
+      {/*
         <Grid item sm>
           <Paper style={styles.Paper}>
           <Table>
@@ -87,6 +94,7 @@ class LogicPane extends Component {
             </Table>
           </Paper>
         </Grid>
+      */}
       </Grid>
     );
   }

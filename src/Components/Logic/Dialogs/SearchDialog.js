@@ -60,7 +60,7 @@ class SearchDialog extends Component {
     // TODO: validation
     const { searchopt } = this.state
     //const today = new Date().toJSON().slice(0,10);
-    if(searchopt.selectedOptionFam){
+    if((searchopt.selectedOptionFam || searchopt.selectedOptionProd || searchopt.selectedOptionObg) && (searchopt.fromdate && searchopt.todate)){
       this.setState({
         open: !this.state.open
       })
