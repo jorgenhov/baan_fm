@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Header, Footer } from './Layouts';
+import { Header } from './Layouts';
 import LogicPane from './Logic/LogicPane';
 //import SimpleMap from './Logic/SimpleMap';
-import { tabs, ships, periods, product2, prodfam, obg, portsdata } from '../store.js';
+import { ships, periods, product2, prodfam, obg } from '../store.js';
 //import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
 
@@ -10,10 +10,6 @@ export default class extends Component {
   state = {
     ships,
     portobj: {},
-    allports: {},
-    selportobj: [],
-    ship: {},
-    selectedport: '',
     apiData: []
   }
 
@@ -56,15 +52,6 @@ export default class extends Component {
   }
 
 
-  handlePortSelected = selport => {
-    let allportobj = this.state.portobj.portobject;
-    let selportob = allportobj[selport];
-    this.setState({
-      selectedport: selport,
-      selportobj: selportob
-    })
-  }
-
   handleNewSearch = searchopt => {
     console.log(searchopt);
     console.log(searchopt.selectedOptionFam);
@@ -80,18 +67,14 @@ export default class extends Component {
   }
 
   render() {
-    const ships = Object.entries(this.getShipsByPorts()),
-      { selectedport } = this.state,
-      { ship } = this.state
+    const ships = Object.entries(this.getShipsByPorts())
 
     ships.sort(function(a,b) {
       return b[1].length - a[1].length;
     })
 
-    const selportobject = this.state.selportobj;
-
     //test api apiData
-    const apid = this.state.apiData;
+    //const apid = this.state.apiData;
 
     return (
       <div className="bodyClass">
@@ -105,10 +88,7 @@ export default class extends Component {
 
         <LogicPane
           className="logicPapers"
-          ship={ship}
           ships={ ships }
-          selportobject={ selportobject }
-          selectedport={ selectedport }
           onSelect={this.handlePortSelected}
         />
 
