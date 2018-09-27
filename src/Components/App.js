@@ -17,6 +17,7 @@ export default class extends Component {
     apiData: []
   }
 
+  //temporary, will be replaced by the search
   componentWillMount() {
     let portobject = this.state.ships.reduce((ships, ship) => {
       const { ports } = ship
@@ -83,33 +84,11 @@ export default class extends Component {
       { selectedport } = this.state,
       { ship } = this.state
 
-
-    //const portobjects = Object.entries(this.state.allports);
-
-    // ikkje brukt
-    /*
-    const shipobject = ships.reduce((x, [k, v]) => {
-      x[k] = v;
-      return x;
-    }, {});
-    */
-    //console.log('shipobject: ' , shipobject);
-
     ships.sort(function(a,b) {
       return b[1].length - a[1].length;
     })
 
-    //console.log(ships);
-
     const selportobject = this.state.selportobj;
-    /*
-    const mapedships = ipdbships.map(([object, prod, imo]) =>{
-          return(
-            ' | ' + object + ' ~ ' + prod + ' ~ ' + imo + ' | '
-          )
-    });
-    */
-    //console.log(mapedships);
 
     //test api apiData
     const apid = this.state.apiData;
@@ -133,12 +112,6 @@ export default class extends Component {
           onSelect={this.handlePortSelected}
         />
 
-        {/*
-        <Footer
-          tabs={ tabs }
-        />
-        <p>Fra api: {apid.content}</p>
-        */}
       </div>
     )
   }
