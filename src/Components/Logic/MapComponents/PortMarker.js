@@ -12,6 +12,20 @@ import TableRow from '@material-ui/core/TableRow';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import ListShips from './ListShips'
+import Tooltip from '@material-ui/core/Tooltip';
+import Zoom from '@material-ui/core/Zoom';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+  MapMarkerStyle: {
+    background: '#001644',
+    background: '-moz-linear-gradient(-45deg, #001644 0%, #074a91 100%)',
+    background: '-webkit-linear-gradient(-45deg, #2151a5 0%,#7db9e8 100%)',
+    background: 'linear-gradient(135deg, #0942a3 0%,#0482e2 100%)',
+  },
+});
+
 
 class PortMarker extends Component {
   constructor(){
@@ -28,6 +42,8 @@ class PortMarker extends Component {
   }
 
   render() {
+
+      const { classes} = this.props
       //makes a new list for the tabel for each boat in this port
       const ship = this.props.port;
       const ships = this.props.ships;
@@ -46,9 +62,14 @@ class PortMarker extends Component {
 
     return (
       <div key={ship.imo}>
-        <Button style={{maxWidth: '22px', maxHeight: '22px', minWidth: '22px', minHeight: '22px', marginLeft:'-11px', marginTop:'-10px'}} variant="fab" onClick={this.handleToggle} mini color="primary">
+      <Tooltip title={ship.ports} placement="left" TransitionComponent={Zoom}>
+        <Button
+          style={{maxWidth: '22px', maxHeight: '22px', minWidth: '22px', minHeight: '22px', marginLeft:'-11px', marginTop:'-11px'}} variant="fab" onClick={this.handleToggle} mini color="primary"
+          className={classes.MapMarkerStyle}
+        >
           <Typography className="PortButtonText" variant="button"><p>{ships.length}</p></Typography>
         </Button>
+      </Tooltip>
         <Dialog
           className="searchDialogStyle"
           open={this.state.open}
@@ -73,4 +94,4 @@ class PortMarker extends Component {
   }
 
 }
-export default PortMarker;
+export default withStyles(styles)(PortMarker);

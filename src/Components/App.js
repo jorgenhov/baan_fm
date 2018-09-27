@@ -86,6 +86,7 @@ export default class extends Component {
           onNewSearch={this.handleNewSearch}
         />
 
+
         <LogicPane
           className="logicPapers"
           ships={ ships }

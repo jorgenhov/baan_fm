@@ -129,7 +129,8 @@ export const prodfam = [{value: 'DM', label: 'DM'},
   {value: 'SG', label: 'SG'},
   {value: 'Rudder', label: 'Rudder'}]
 
-export const product2 = [{value: 'DM', label: 'DM', link: 'DM'},
+export const product2 = [{value: 'All Products', label: 'All Products'},
+  {value: 'DM', label: 'DM', link: 'DM'},
   {value: 'LP Winch', label: 'LP Winch', link: 'DM'},
   {value: 'SG-RV', label: 'SG-RV', link: 'SG'},
   {value: 'SG-SR', label: 'SG-SR', link: 'SG'},

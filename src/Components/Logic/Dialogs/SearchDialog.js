@@ -13,6 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 //import Select from '@material-ui/core/Select';
 import Select from 'react-select'
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   root: {
@@ -49,9 +50,9 @@ class SearchDialog extends Component {
       searchopt: {
           fromdate: new Date().toJSON().slice(0,10),
           todate: new Date().toJSON().slice(0,10),
-          selectedOptionFam: {value: 'All Product family', label: ' All Product family'},
-          selectedOptionProd: [{value: 'All Products', label: 'All Products'}],
-          selectedOptionObg:[{value: 'All objects', label: 'All objects'}],
+          selectedOptionFam: {value: 'Select Product Family', label: 'Select Product Family'},
+          selectedOptionProd: {value: 'All Products', label: 'All Products'},
+          selectedOptionObg:[],
       }
     }
   }
@@ -59,21 +60,17 @@ class SearchDialog extends Component {
   handleSubmit = () => {
     // TODO: validation
     const { searchopt } = this.state
+    console.log(searchopt.selectedOptionObg);
     //const today = new Date().toJSON().slice(0,10);
-    if((searchopt.selectedOptionFam || searchopt.selectedOptionProd || searchopt.selectedOptionObg) && (searchopt.fromdate && searchopt.todate)){
+    if(searchopt.selectedOptionProd.value === 'All Products' && searchopt.selectedOptionFam.value === 'Select Product Family' && !searchopt.selectedOptionObg[0]){
+      alert('You need to at least make one selection.')
+    }else {
       this.setState({
         open: !this.state.open
       })
       this.props.onSearch(searchopt)
-    }else {
-      let alertmsg = '';
-      if (!searchopt.selectedOptionFam) {
-        alertmsg = alertmsg + 'Choose a product family.'
-      }else {
-        alertmsg = alertmsg + 'Something went wrong, try again.'
-      }
-      alert(alertmsg)
     }
+
   }
 
   handleDateFromChange = (event)=>{
@@ -94,6 +91,7 @@ class SearchDialog extends Component {
     })
   }
 
+  //If you chose a product family, the product select will only show products from the chosen product family. Also sets the selected product family to state
   handleChangeFam = (selectedOptionFam) => {
      this.setState({
        searchopt: {
@@ -102,12 +100,17 @@ class SearchDialog extends Component {
        }
      })
 
-     let filter = selectedOptionFam ? this.state.product2.filter((o) => o.link === selectedOptionFam.value) : this.state.product2
-     console.log(filter)
+     let filter;
+     if(selectedOptionFam.value === 'Select Product Family'){
+       filter = this.state.product2;
+     }else {
+       filter = selectedOptionFam ? this.state.product2.filter((o) => o.link === selectedOptionFam.value) : this.state.product2
+     }
 
      this.setState({filteredOptions: filter})
   };
 
+  //If you chose a product, the object group select will only show objects from the chosen product. Also sets the selected product to state
   handleChangeProd = (selectedOptionProd) => {
     this.setState({
       searchopt: {
@@ -116,11 +119,16 @@ class SearchDialog extends Component {
       }
     })
 
-    let filter = selectedOptionProd ? this.state.obg.filter((o) => o.link === selectedOptionProd.value) : this.state.obg
-    console.log(filter)
+    let filter;
+    if(selectedOptionProd.value === 'All Products'){
+      filter = this.state.obg;
+    }else {
+      filter = selectedOptionProd ? this.state.obg.filter((o) => o.link === selectedOptionProd.value) : this.state.obg
+    }
 
     this.setState({filteredOptionsObg: filter})
   }
+
 
   handleChangeObg = (selectedOption) => {
     this.setState({
@@ -157,9 +165,11 @@ class SearchDialog extends Component {
 
     return (
       <div>
+      <Tooltip title="New search" placement="bottom" enterDelay={500}>
         <Button variant="fab" onClick={this.handleToggle} mini>
           <Search />
         </Button>
+      </Tooltip>
           <Dialog
             className="searchDialogStyle"
             open={open}
