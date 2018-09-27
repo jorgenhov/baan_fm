@@ -11,6 +11,8 @@
 
 PortMap.js
 
+store.js
+
 # misc
 .DS_Store
 .env.local

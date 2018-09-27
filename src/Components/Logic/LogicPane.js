@@ -47,7 +47,6 @@ class LogicPane extends Component {
     const portships = this.props.ships;
     console.log(selectedportobject);
     */
-
     return (
       <Grid container>
         <PortMap

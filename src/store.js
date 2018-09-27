@@ -182,6 +182,46 @@ export const ships = [
       lat: 33.915301,
       lng: 130.84631,
     },
+    {
+      imo: '9223435',
+      name: 'Åsnesen',
+      ports: 'Alesund',
+      eta: '2018-09-29 18:00:00+00:00',
+      lat: 62.469601,
+      lng: 6.137753,
+    },
+    {
+      imo: '2383435',
+      name: 'Karlsen',
+      ports: 'Alesund',
+      eta: '2018-09-27 18:00:00+00:00',
+      lat: 62.469601,
+      lng: 6.137753,
+    },
+    {
+      imo: '9283123',
+      name: 'Boaty',
+      ports: 'Alesund',
+      eta: '2018-10-05 18:00:00+00:00',
+      lat: 62.469601,
+      lng: 6.137753,
+    },
+    {
+      imo: '9211225',
+      name: 'Svinsen',
+      ports: 'Alesund',
+      eta: '2018-09-28 18:00:00+00:00',
+      lat: 62.469601,
+      lng: 6.137753,
+    },
+    {
+      imo: '9283654',
+      name: 'Lorken',
+      ports: 'Alesund',
+      eta: '2018-09-29 18:00:00+00:00',
+      lat: 62.469601,
+      lng: 6.137753,
+    },
 ]
 
 

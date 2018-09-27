@@ -57,3 +57,9 @@ body {
 .MapContainer {
   max-height: 10px;
 }
+
+.PortButtonText p {
+  color: white;
+  margin-top: 0.1em;
+  font-size: 80%;
+}

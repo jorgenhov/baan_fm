@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export default ({ products, onNewSearch, periods, product2, prodfam, obg }) => (
   <AppBar
     position="static"
+    style={{ height: '11vh', width: '100%' }}
   >
     <Toolbar className="headerUI">
       <Typography variant="title" color="inherit" style={{flex: 1}}>
