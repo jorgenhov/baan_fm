@@ -23,6 +23,12 @@ const styles = theme => ({
     background: '-moz-linear-gradient(-45deg, #001644 0%, #074a91 100%)',
     background: '-webkit-linear-gradient(-45deg, #2151a5 0%,#7db9e8 100%)',
     background: 'linear-gradient(135deg, #0942a3 0%,#0482e2 100%)',
+    maxWidth: '22px',
+    maxHeight: '22px',
+    minWidth: '22px',
+    minHeight: '22px',
+    marginLeft:'-11px',
+    marginTop:'-11px',
   },
 });
 
@@ -64,7 +70,7 @@ class PortMarker extends Component {
       <div key={ship.imo}>
       <Tooltip title={ship.ports} placement="left" TransitionComponent={Zoom}>
         <Button
-          style={{maxWidth: '22px', maxHeight: '22px', minWidth: '22px', minHeight: '22px', marginLeft:'-11px', marginTop:'-11px'}} variant="fab" onClick={this.handleToggle} mini color="primary"
+          variant="fab" onClick={this.handleToggle} mini color="primary"
           className={classes.MapMarkerStyle}
         >
           <Typography className="PortButtonText" variant="button"><p>{ships.length}</p></Typography>
