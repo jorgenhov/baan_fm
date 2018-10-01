@@ -6,12 +6,10 @@ import { ships, periods, product2, prodfam, obg } from '../store.js';
 //import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
 import Login from './user/login/login.js';
-import Button from '@material-ui/core/Button';
-import Search from '@material-ui/icons/Search';
 
 import { notification } from 'antd';
 
-import { getCurrentUser } from './util/APIUtils';
+import { getCurrentUser, getGoogleMapsApiKey } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
 
 export default class extends Component {
@@ -54,16 +52,6 @@ export default class extends Component {
     if(localStorage.getItem(ACCESS_TOKEN)){
       this.loadCurrentUser();
     }
-    /*
-    fetch('http://localhost:8080/Ship')
-    .then(response => response.json())
-    .then(json => console.log(json));
-
-    //fra apien der apien kalla en anna api
-    fetch('http://localhost:8080/resttemp')
-    .then(response => response.json())
-    .then(json => console.log(json))
-    */
   }
 
   loadCurrentUser() {
@@ -86,10 +74,6 @@ export default class extends Component {
 
   handleLogin() {
     console.log('loggedin');
-    notification.success({
-      message: 'Baan FM',
-      description: "You logged in successfully.",
-    });
     this.loadCurrentUser();
   }
 
@@ -102,11 +86,6 @@ export default class extends Component {
     this.setState({
       currentUser: null,
       isAuthenticated: false
-    });
-
-    notification.success({
-      message: 'Baan FM',
-      description: "You logged out successfully.",
     });
   }
 
@@ -143,30 +122,47 @@ export default class extends Component {
       return b[1].length - a[1].length;
     })
 
-    let loginout;
+    let logicPanes;
     if(this.state.isAuthenticated){
-      loginout = <Button onClick={this.handleLogout}>
-        <h4>LOGOUT: {this.state.currentUser.name}</h4>
-      </Button>
-    }else {
-      loginout = <Login onLogin={this.handleLogin} />
-    }
-
-    //test api apiData
-    //const apid = this.state.apiData;
-
-    return (
+      logicPanes =
       <div className="bodyClass">
-
-        {loginout}
-
         <Header
           product2={product2}
           prodfam={prodfam}
           obg={obg}
           periods={periods}
           onNewSearch={this.handleNewSearch}
+          isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+          onLogout={this.handleLogout}
         />
+        <LogicPane
+          className="logicPapers"
+          ships={ ships }
+          onSelect={this.handlePortSelected}
+        />
+      </div>
+    }else {
+      logicPanes =
+      <div className="bodyClass">
+        <Header
+          product2={product2}
+          prodfam={prodfam}
+          obg={obg}
+          periods={periods}
+          onNewSearch={this.handleNewSearch}
+          isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+        />
+        <Login
+          onLogin={this.handleLogin}
+        />
+      </div>
+    }
+
+    return (
+      <div>
+        {logicPanes}
 
         {/*
         <LogicPane
@@ -174,8 +170,8 @@ export default class extends Component {
           ships={ ships }
           onSelect={this.handlePortSelected}
         />*/}
-
       </div>
+
     )
   }
 }

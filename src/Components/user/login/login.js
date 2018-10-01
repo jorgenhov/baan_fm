@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login } from '../../util/APIUtils';
+import { login, getGoogleMapsApiKey } from '../../util/APIUtils';
 import './Login.css';
 import { ACCESS_TOKEN } from '../../constants';
 
@@ -10,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Search from '@material-ui/icons/Search';
+import Typography from '@material-ui/core/Typography';
 
 
 import { Form, Input, Button, Icon, notification } from 'antd';
@@ -34,8 +35,8 @@ class Login extends Component {
         const open = this.state.open;
         return (
           <div>
-            <Buttonmu onClick={this.handleToggle}>
-              <h4>LOGIN</h4>
+            <Buttonmu color="primary" variant="outlined" style={{marginLeft: '47%', marginRight: '53%', marginTop: '3%'}} onClick={this.handleToggle}>
+              <Typography>LOGIN</Typography>
             </Buttonmu>
             <Dialog
               className="searchDialogStyle"
@@ -69,6 +70,7 @@ class LoginForm extends Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
+                    getGoogleMapsApiKey()
                 }).catch(error => {
                     if(error.status === 401) {
                         console.log('feil brukarnavn');

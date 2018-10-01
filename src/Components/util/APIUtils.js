@@ -71,3 +71,10 @@ export function getUserProfile(username) {
         method: 'GET'
     });
 }
+
+export function getGoogleMapsApiKey(){
+  return request({
+    url: API_BASE_URL + "/cont/key",
+    method: 'GET'
+  })
+}
