@@ -210,27 +210,27 @@ class SearchDialog extends Component {
                     options={filteredOptionsObg}
                   />
                 </FormControl>
-                <TextField
-                  id="date"
-                  label="From"
-                  type="date"
-                  defaultValue={fromdate}
-                  onChange={this.handleDateFromChange}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  id="date"
-                  label="To"
-                  type="date"
-                  defaultValue={todate}
-                  onChange={this.handleDateToChange}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                  <TextField
+                    id="date"
+                    label="From"
+                    type="date"
+                    defaultValue={fromdate}
+                    onChange={this.handleDateFromChange}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <TextField
+                    id="date"
+                    label="To"
+                    type="date"
+                    defaultValue={todate}
+                    onChange={this.handleDateToChange}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                 />
               </form>
             </DialogContent>

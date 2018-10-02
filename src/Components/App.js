@@ -5,12 +5,40 @@ import LogicPane from './Logic/LogicPane';
 import { ships, periods, product2, prodfam, obg } from '../store.js';
 //import { ipdbships } from '../ipdb.js';
 import { diffdate} from './Helpers/Functions.js'
+import Login from './user/login/login.js';
+
+import { notification } from 'antd';
+
+
+
+import { getCurrentUser, getGoogleMapsApiKey } from './util/APIUtils';
+import { ACCESS_TOKEN } from './constants';
 
 export default class extends Component {
-  state = {
-    ships,
-    portobj: {},
-    apiData: []
+  constructor(props){
+    super(props);
+    this.state = {
+      ships,
+      portobj: {},
+      apiKey: null,
+      apiData: [],
+      currentUser: null,
+      isAuthenticated: false,
+      isLoading: false,
+      contHeight: {
+        header: '57px',
+        map: '400px'
+      }
+    }
+    this.handleLogout = this.handleLogout.bind(this);
+    this.loadCurrentUser = this.loadCurrentUser.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+
+    notification.config({
+      placement: 'topRight',
+      top: 70,
+      duration: 3,
+    });
   }
 
   //temporary, will be replaced by the search
@@ -28,16 +56,59 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    /*
-    fetch('http://localhost:8080/Ship')
-    .then(response => response.json())
-    .then(json => console.log(json));
+    if(localStorage.getItem(ACCESS_TOKEN)){
+      this.loadCurrentUser();
+    }
+    this.getContainerHeights();
+  }
 
-    //fra apien der apien kalla en anna api
-    fetch('http://localhost:8080/resttemp')
-    .then(response => response.json())
-    .then(json => console.log(json))
-    */
+  getContainerHeights(){
+    let wHeight = window.innerHeight;
+    let mHeight = wHeight - 64;
+    let maHeight = mHeight.toString();
+    let mapHeight = maHeight.concat('px');
+    this.setState({
+      contHeight: {
+        map: mapHeight
+      }
+    });
+  }
+
+  loadCurrentUser() {
+    this.setState({
+      isLoading: true
+    });
+    getCurrentUser()
+    .then(response => {
+      this.setState({
+        currentUser: response,
+        isAuthenticated: true,
+        apiKey: response.gmkey,
+        isLoading: false
+      });
+    }).catch(error => {
+      this.setState({
+        isLoading: false
+      });
+    });
+  }
+
+  handleLogin() {
+    console.log('loggedin');
+    this.loadCurrentUser();
+  }
+
+  handleLogout() {
+
+    console.log('Logout');
+
+    localStorage.removeItem(ACCESS_TOKEN);
+
+    this.setState({
+      currentUser: null,
+      isAuthenticated: false,
+      apiKey: null
+    });
   }
 
 
@@ -61,22 +132,20 @@ export default class extends Component {
     console.log(searchopt.todate);
     let days = diffdate(searchopt.fromdate, searchopt.todate)
     console.log(days);
-    fetch('http://localhost:8080/Ship?theship=' + searchopt.product)
-    .then(response => response.json())
-    .then(json => this.setState({apiData: json}));
   }
 
   render() {
+    console.log(this.state.contHeight.map);
+
     const ships = Object.entries(this.getShipsByPorts())
 
     ships.sort(function(a,b) {
       return b[1].length - a[1].length;
     })
 
-    //test api apiData
-    //const apid = this.state.apiData;
-
-    return (
+    let logicPanes;
+    if(this.state.isAuthenticated){
+      logicPanes =
       <div className="bodyClass">
         <Header
           product2={product2}
@@ -84,16 +153,44 @@ export default class extends Component {
           obg={obg}
           periods={periods}
           onNewSearch={this.handleNewSearch}
+          isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+          onLogout={this.handleLogout}
+          contHeight={this.state.contHeight}
         />
-
-
         <LogicPane
           className="logicPapers"
           ships={ ships }
+          apiKey={this.state.apiKey}
+          currentUser={this.state.currentUser}
           onSelect={this.handlePortSelected}
+          contHeight={this.state.contHeight}
         />
-
       </div>
+    }else {
+      logicPanes =
+      <div className="bodyClass">
+        <Header
+          product2={product2}
+          prodfam={prodfam}
+          obg={obg}
+          periods={periods}
+          onNewSearch={this.handleNewSearch}
+          isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+          contHeight={this.state.contHeight}
+        />
+        <Login
+          onLogin={this.handleLogin}
+        />
+      </div>
+    }
+
+    return (
+      <div>
+        {logicPanes}
+      </div>
+
     )
   }
 }
