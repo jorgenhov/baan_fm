@@ -139,6 +139,7 @@ export default class extends Component {
         <LogicPane
           className="logicPapers"
           ships={ ships }
+          currentUser={this.state.currentUser}
           onSelect={this.handlePortSelected}
         />
       </div>

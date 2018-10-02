@@ -9,6 +9,7 @@ class LogicPane extends Component {
       <Grid container>
         <PortMap
           ships={this.props.ships}
+          currentUser={this.props.currentUser}
           apiKey={this.props.apiKey}
         />
       </Grid>
