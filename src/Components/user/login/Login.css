@@ -1,10 +1,33 @@
 .login-container {
     max-width: 420px;
     margin: 0 auto;
-    margin: 0 auto;
-    margin-top: 40px;
+    padding: 2em;
 }
 
 .login-form-button {
     width: 100%;
+}
+
+.ant-form-item {
+  margin-bottom: 1em;
+}
+
+.ant-input {
+  border: 0;
+  outline: 0;
+  border-bottom: 0.5px solid #074a91;
+}
+
+.login-form-button {
+  background: transparent;
+  border: 0.5px solid #074a91;
+  border-radius: 4px;
+}
+
+.login-form-button span {
+  color: black;
+}
+
+.login-form-button:hover {
+  background: rgba(63,81,181,0.1)
 }

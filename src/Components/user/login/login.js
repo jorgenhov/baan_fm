@@ -35,8 +35,8 @@ class Login extends Component {
         const open = this.state.open;
         return (
           <div>
-            <Buttonmu color="primary" variant="outlined" style={{marginLeft: '47%', marginRight: '53%', marginTop: '3%'}} onClick={this.handleToggle}>
-              <Typography>LOGIN</Typography>
+            <Buttonmu color="primary" variant="outlined" style={{marginLeft: '44%', marginRight: '56%', marginTop: '13%'}} onClick={this.handleToggle}>
+              <Typography variant="display1">LOGIN</Typography>
             </Buttonmu>
             <Dialog
               className="searchDialogStyle"
@@ -44,7 +44,7 @@ class Login extends Component {
               onClose={this.handleToggle}
             >
               <div className="login-container">
-                  <h1 className="page-title">Login</h1>
+                  <h2 className="page-title">Login</h2>
                   <div className="login-content">
                       <AntWrappedLoginForm onLogin={this.props.onLogin} />
                   </div>
@@ -70,7 +70,6 @@ class LoginForm extends Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
-                    getGoogleMapsApiKey()
                 }).catch(error => {
                     if(error.status === 401) {
                         console.log('feil brukarnavn');

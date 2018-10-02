@@ -28,14 +28,14 @@ class Header extends Component {
     return (
       <AppBar
         position="static"
-        style={{ height: '10vh', width: '100%' }}
+        style={{ height: this.props.contHeight.header, width: '100%' }}
       >
         <Toolbar className="headerUI">
           <Typography variant="title" color="inherit" style={{flex: 1}}>
             Ships in port
           </Typography>
           {logout}
-          {search}          
+          {search}
         </Toolbar>
       </AppBar>
     )

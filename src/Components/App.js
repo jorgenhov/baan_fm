@@ -9,6 +9,8 @@ import Login from './user/login/login.js';
 
 import { notification } from 'antd';
 
+
+
 import { getCurrentUser, getGoogleMapsApiKey } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
 
@@ -18,10 +20,15 @@ export default class extends Component {
     this.state = {
       ships,
       portobj: {},
+      apiKey: null,
       apiData: [],
       currentUser: null,
       isAuthenticated: false,
       isLoading: false,
+      contHeight: {
+        header: '57px',
+        map: '400px'
+      }
     }
     this.handleLogout = this.handleLogout.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
@@ -52,6 +59,19 @@ export default class extends Component {
     if(localStorage.getItem(ACCESS_TOKEN)){
       this.loadCurrentUser();
     }
+    this.getContainerHeights();
+  }
+
+  getContainerHeights(){
+    let wHeight = window.innerHeight;
+    let mHeight = wHeight - 64;
+    let maHeight = mHeight.toString();
+    let mapHeight = maHeight.concat('px');
+    this.setState({
+      contHeight: {
+        map: mapHeight
+      }
+    });
   }
 
   loadCurrentUser() {
@@ -63,6 +83,7 @@ export default class extends Component {
       this.setState({
         currentUser: response,
         isAuthenticated: true,
+        apiKey: response.gmkey,
         isLoading: false
       });
     }).catch(error => {
@@ -85,7 +106,8 @@ export default class extends Component {
 
     this.setState({
       currentUser: null,
-      isAuthenticated: false
+      isAuthenticated: false,
+      apiKey: null
     });
   }
 
@@ -110,12 +132,11 @@ export default class extends Component {
     console.log(searchopt.todate);
     let days = diffdate(searchopt.fromdate, searchopt.todate)
     console.log(days);
-    fetch('http://localhost:8080/Ship?theship=' + searchopt.product)
-    .then(response => response.json())
-    .then(json => this.setState({apiData: json}));
   }
 
   render() {
+    console.log(this.state.contHeight.map);
+
     const ships = Object.entries(this.getShipsByPorts())
 
     ships.sort(function(a,b) {
@@ -135,12 +156,15 @@ export default class extends Component {
           isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           onLogout={this.handleLogout}
+          contHeight={this.state.contHeight}
         />
         <LogicPane
           className="logicPapers"
           ships={ ships }
+          apiKey={this.state.apiKey}
           currentUser={this.state.currentUser}
           onSelect={this.handlePortSelected}
+          contHeight={this.state.contHeight}
         />
       </div>
     }else {
@@ -154,6 +178,7 @@ export default class extends Component {
           onNewSearch={this.handleNewSearch}
           isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
+          contHeight={this.state.contHeight}
         />
         <Login
           onLogin={this.handleLogin}
@@ -164,13 +189,6 @@ export default class extends Component {
     return (
       <div>
         {logicPanes}
-
-        {/*
-        <LogicPane
-          className="logicPapers"
-          ships={ ships }
-          onSelect={this.handlePortSelected}
-        />*/}
       </div>
 
     )

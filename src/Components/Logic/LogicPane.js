@@ -11,6 +11,7 @@ class LogicPane extends Component {
           ships={this.props.ships}
           currentUser={this.props.currentUser}
           apiKey={this.props.apiKey}
+          contHeight={this.props.contHeight}
         />
       </Grid>
     );
