@@ -1,0 +1,8 @@
+.MuiTypography-root-41 a{
+  color: black;
+}
+
+.MuiTypography-root-41:hover a{
+  color: #575757;
+  text-decoration: none;
+}

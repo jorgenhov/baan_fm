@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { Header } from './Layouts';
+import Header from './Layouts/Header';
 import LogicPane from './Logic/LogicPane';
 //import SimpleMap from './Logic/SimpleMap';
 import { ships, periods, product2, prodfam, obg } from '../store.js';
 //import { ipdbships } from '../ipdb.js';
-import { diffdate} from './Helpers/Functions.js'
+import { diffdate } from './Helpers/Functions.js'
 import Login from './user/login/login.js';
-
-import { Route, withRouter, Switch } from 'react-router-dom';
 
 import { getCurrentUser, getGoogleMapsApiKey } from './util/APIUtils';
 import { ACCESS_TOKEN } from './constants';
 
-export default class extends Component {
+class App extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -187,3 +185,5 @@ export default class extends Component {
     )
   }
 }
+
+export default App
