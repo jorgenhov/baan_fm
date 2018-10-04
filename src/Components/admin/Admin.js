@@ -79,7 +79,10 @@ class Admin extends Component {
 
     return(
       <div>
-        <Header />
+        <Header
+          isAuthenticated={this.state.isAuthenticated}
+          onLogout={this.handleLogout}
+        />
         {logicPanes}
       </div>
     )

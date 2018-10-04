@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './Header.css';
 
@@ -8,31 +8,36 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 const styles = {
   root: {
     flexGrow: 1,
   },
 };
+class Header extends Component {
+  render() {
+    let logout;
+    if(this.props.isAuthenticated){
+      logout =
+      <Button mini onClick={this.props.onLogout}>
+        <Typography style={{color: 'black'}}>Logout</Typography>
+      </Button>
+    }
 
-function SimpleAppBar(props) {
-  const { classes } = props;
-
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            <Link to='/'>Go to Application</Link>
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    return (
+      <div>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit" style={{flex: 1}}>
+              <Link to='/'>Go to Application</Link>
+            </Typography>
+            {logout}
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-SimpleAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleAppBar);
+export default withStyles(styles)(Header);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login, getGoogleMapsApiKey } from '../../util/APIUtils';
+import { login } from '../../util/APIUtils';
 import './Login.css';
 import { ACCESS_TOKEN } from '../../constants';
 

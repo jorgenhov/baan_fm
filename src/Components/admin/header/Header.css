@@ -6,3 +6,7 @@
   color: #575757;
   text-decoration: none;
 }
+
+.root {
+    flex-grow: 1;
+}
